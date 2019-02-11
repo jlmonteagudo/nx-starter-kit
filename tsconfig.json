@@ -16,6 +16,15 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@blog/feature-layout": [
+        "libs/feature-layout/src/index.ts"
+      ],
+      "@blog/feature-blog": [
+        "libs/feature-blog/src/index.ts"
+      ],
+      "@blog/shared/ui-material": [
+        "libs/shared/ui-material/src/index.ts"
+      ]
     }
   },
   "exclude": [

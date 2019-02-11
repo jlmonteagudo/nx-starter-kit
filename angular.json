@@ -2,13 +2,251 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "blog": {
+      "root": "apps/blog/",
+      "sourceRoot": "apps/blog/src",
+      "projectType": "application",
+      "prefix": "blog",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss",
+          "spec": false
+        },
+        "@schematics/angular:class": {
+          "spec": false
+        },
+        "@schematics/angular:directive": {
+          "spec": false
+        },
+        "@schematics/angular:guard": {
+          "spec": false
+        },
+        "@schematics/angular:module": {
+          "spec": false
+        },
+        "@schematics/angular:pipe": {
+          "spec": false
+        },
+        "@schematics/angular:service": {
+          "spec": false
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/blog",
+            "index": "apps/blog/src/index.html",
+            "main": "apps/blog/src/main.ts",
+            "polyfills": "apps/blog/src/polyfills.ts",
+            "tsConfig": "apps/blog/tsconfig.app.json",
+            "assets": [
+              "apps/blog/src/favicon.ico",
+              "apps/blog/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/blog/src/styles.scss",
+              "apps/blog/src/assets/styles/style.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/blog/src/environments/environment.ts",
+                  "with": "apps/blog/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "blog:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "blog:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "blog:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/blog/src/test.ts",
+            "polyfills": "apps/blog/src/polyfills.ts",
+            "tsConfig": "apps/blog/tsconfig.spec.json",
+            "karmaConfig": "apps/blog/karma.conf.js",
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/blog/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/blog/src/favicon.ico",
+              "apps/blog/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/blog/tsconfig.app.json",
+              "apps/blog/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "blog-e2e": {
+      "root": "apps/blog-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/blog-e2e/protractor.conf.js",
+            "devServerTarget": "blog:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "blog:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/blog-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-layout": {
+      "root": "libs/feature-layout",
+      "sourceRoot": "libs/feature-layout/src",
+      "projectType": "library",
+      "prefix": "blog",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-layout/src/test.ts",
+            "tsConfig": "libs/feature-layout/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-layout/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-layout/tsconfig.lib.json",
+              "libs/feature-layout/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-blog": {
+      "root": "libs/feature-blog",
+      "sourceRoot": "libs/feature-blog/src",
+      "projectType": "library",
+      "prefix": "blog",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-blog/src/test.ts",
+            "tsConfig": "libs/feature-blog/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-blog/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-blog/tsconfig.lib.json",
+              "libs/feature-blog/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "shared-ui-material": {
+      "root": "libs/shared/ui-material",
+      "sourceRoot": "libs/shared/ui-material/src",
+      "projectType": "library",
+      "prefix": "blog",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/ui-material/src/test.ts",
+            "tsConfig": "libs/shared/ui-material/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/ui-material/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/ui-material/tsconfig.lib.json",
+              "libs/shared/ui-material/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
       "versionMismatch": false
     },
     "defaultCollection": "@nrwl/schematics"
-    
-  }
+  },
+  "defaultProject": "blog"
 }

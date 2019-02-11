@@ -7,5 +7,21 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "blog": {
+      "tags": []
+    },
+    "blog-e2e": {
+      "tags": []
+    },
+    "feature-layout": {
+      "tags": []
+    },
+    "feature-blog": {
+      "tags": []
+    },
+    "shared-ui-material": {
+      "tags": []
+    }
+  }
 }
