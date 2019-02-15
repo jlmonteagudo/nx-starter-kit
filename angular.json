@@ -239,6 +239,34 @@
           }
         }
       }
+    },
+    "data-access-blog": {
+      "root": "libs/data-access-blog",
+      "sourceRoot": "libs/data-access-blog/src",
+      "projectType": "library",
+      "prefix": "blog",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/data-access-blog/src/test.ts",
+            "tsConfig": "libs/data-access-blog/tsconfig.spec.json",
+            "karmaConfig": "libs/data-access-blog/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/data-access-blog/tsconfig.lib.json",
+              "libs/data-access-blog/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

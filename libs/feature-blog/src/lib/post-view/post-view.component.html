@@ -1,0 +1,8 @@
+<div *ngIf="post">
+  <h1>{{ post.title }}</h1>
+  {{ post.body }}
+</div>
+
+<div *ngIf="!post">
+  <h4>No se ha seleccionado ningún post</h4>
+</div>

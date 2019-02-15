@@ -1,23 +1,85 @@
+<div class="content"
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxFlexFill>
 
-<!-- ============================================================== -->
-<!-- Simple four boxes Row -->
-<!-- ============================================================== -->
+    <div fxFlex="50" fxFlex.xs="50">
+
+        <mat-card>
+            <mat-card-content>
+
+              <mat-selection-list #postsView (selectionChange)="onPostSelected($event)">
+                <mat-list-option *ngFor="let post of posts$ | async" [value]="post">
+                  {{ post.title }}
+                </mat-list-option>
+              </mat-selection-list>
+
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+    <div fxFlex="50" fxFlex.xs="50">
+
+        <mat-card>
+            <mat-card-content>
+              <blog-post-view [post]="selectedPost"></blog-post-view>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+</div>
+
+
+<!--
 <div fxLayout="row" fxLayoutWrap="wrap">
-  <!-- column -->
+
   <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
       <mat-card>
           <mat-card-content>
-              <!-- Row -->
+
               <div fxLayout="row" fxLayoutWrap="wrap">
-                  <!-- column -->
+
                   <div fxFlex.gt-sm="50" fxFlex.gt-xs="50">
-                      Buy our Pro version with tones of features
-                      <br/><br/>
-                      <a href="https://wrappixel.com/templates/materialpro-angular-dashboard/" mat-raised-button color="warn">Upgrade To Pro</a>
+
+                    <p>
+                        Options selected: {{posts.selectedOptions.selected.length}}
+                    </p>
+
+                    <mat-selection-list #posts>
+                      <mat-list-option *ngFor="let post of posts$ | async">
+                        {{ post.title }}
+                      </mat-list-option>
+                    </mat-selection-list>
+
                   </div>
               </div>
           </mat-card-content>
       </mat-card>
   </div>
-  <!-- column -->
+
+
 </div>
+
+
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+      <mat-card>
+          <mat-card-content>
+
+              <div fxLayout="row" fxLayoutWrap="wrap">
+
+                  <div fxFlex.gt-sm="50" fxFlex.gt-xs="50">
+                      <blog-post-view></blog-post-view>
+                  </div>
+              </div>
+          </mat-card-content>
+      </mat-card>
+  </div>
+
+</div>
+
+-->
