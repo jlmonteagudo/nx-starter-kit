@@ -6,6 +6,12 @@ import { NxModule } from '@nrwl/nx';
 import { RouterModule, Route } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeatureLayoutModule, LayoutComponent } from '@blog/feature-layout';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { storeFreeze } from 'ngrx-store-freeze';
 
 const routes: Route[] = [
   {
@@ -30,7 +36,11 @@ const routes: Route[] = [
       initialNavigation: 'enabled'
     }),
     BrowserAnimationsModule,
-    FeatureLayoutModule
+    FeatureLayoutModule,
+    StoreModule.forRoot({},{ metaReducers : !environment.production ? [storeFreeze] : [] }),
+    EffectsModule.forRoot([]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreRouterConnectingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

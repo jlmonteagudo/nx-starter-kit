@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BlogService, Post } from '@blog/data-access-blog';
+import { Post, BlogFacade } from '@blog/data-access-blog';
 import { Observable } from 'rxjs';
 import { MatSelectionList, MatListOption, MatSelectionListChange } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -11,21 +11,23 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class PostListComponent implements OnInit {
 
-  @ViewChild(MatSelectionList) postsView: MatSelectionList;
+  @ViewChild('postsView') selectionList: MatSelectionList;
 
   posts$: Observable<Post[]>;
-  selectedPost: Post;
+  selectedPost$: Observable<Post>;
 
-  constructor(private blogService: BlogService) {
-    this.posts$ = this.blogService.findAll();
+  constructor(private blogFacade: BlogFacade) {
+    this.blogFacade.loadAll();
+    this.posts$ = this.blogFacade.allBlog$
+    this.selectedPost$ = this.blogFacade.selectedBlog$;
   }
 
   ngOnInit() {
-    this.postsView.selectedOptions = new SelectionModel<MatListOption>(false);
+    this.selectionList.selectedOptions = new SelectionModel<MatListOption>(false);
   }
 
   onPostSelected(event: MatSelectionListChange) {
-    this.selectedPost = event.option.value;
+    this.blogFacade.selectBlog(event.option.value);
   }
 
 }

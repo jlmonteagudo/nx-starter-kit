@@ -23,7 +23,7 @@
 
         <mat-card>
             <mat-card-content>
-              <blog-post-view [post]="selectedPost"></blog-post-view>
+              <blog-post-view [post]="selectedPost$ | async"></blog-post-view>
             </mat-card-content>
         </mat-card>
 
